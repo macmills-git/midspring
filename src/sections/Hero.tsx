@@ -61,8 +61,13 @@ export const Hero: React.FC<HeroProps> = ({
 
         {/* Supporting Subtitle */}
         <FadeIn delay={0.12} y={18}>
-          <p className="mt-4 sm:mt-5 text-neutral-500 text-[13.5px] sm:text-[15.5px] max-w-[620px] mx-auto leading-relaxed font-normal px-2 sm:px-0">
-            Never be short on creatives. AI Video Studio uses your products, your briefs, and your top-performing content as context. You generate variants. You still review them. This burns credits. The list, the storefronts, and the campaigns do not.
+          <p className="mt-3 sm:mt-5 text-neutral-500 text-[13.5px] sm:text-[16px] max-w-[560px] mx-auto leading-relaxed font-normal px-4 sm:px-0">
+            <span className="sm:hidden">
+              Turn your products and briefs into high-converting video ads in minutes.
+            </span>
+            <span className="hidden sm:inline">
+              Turn your products, briefs, and top-performing content into high-converting video ads on autopilot.
+            </span>
           </p>
         </FadeIn>
 
@@ -330,7 +335,7 @@ export const Hero: React.FC<HeroProps> = ({
       <FadeIn delay={0.1} y={20}>
         <div className="max-w-[1340px] mx-auto px-4 sm:px-8 lg:px-14 mt-12 sm:mt-20 text-center">
           <p className="text-[12px] sm:text-[13px] text-neutral-500 mb-6 sm:mb-8 font-normal max-w-xl mx-auto px-2">
-            Enriching billions of transactions for category-defining fintechs & Fortune 500 banks every month
+            Trusted by category-defining brands and high-velocity creator teams worldwide
           </p>
 
           {/* Clean Monochrome Partner Logos Grid / Wrap */}

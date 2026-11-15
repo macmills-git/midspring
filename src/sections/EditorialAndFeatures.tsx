@@ -43,7 +43,7 @@ export const EditorialAndFeatures: React.FC<EditorialAndFeaturesProps> = ({
             {/* Right Column: Description + Two Buttons */}
             <div className="lg:col-span-5 flex flex-col justify-start pt-1">
               <p className="text-neutral-500 text-[13px] sm:text-[13.5px] leading-relaxed max-w-[440px] mb-4 font-normal">
-                From creator campaigns to AI-powered creative and performance tracking, we brings your entire social commerce workflow into one place.
+                From creator campaigns to AI creative and analytics, Midspring unifies your entire social commerce workflow.
               </p>
 
               <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 w-full xs:w-auto">
