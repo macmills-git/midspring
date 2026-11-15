@@ -123,56 +123,67 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Platform Workspace (Responsive Columns) */}
-            <div className="grid grid-cols-1 md:grid-cols-12 min-h-[460px] sm:min-h-[580px] bg-white text-left text-neutral-700">
-              {/* Column 1: Left Navigation Sidebar (Desktop/Tablet) */}
-              <div className="hidden md:flex md:col-span-3 lg:col-span-2 border-r border-neutral-100 p-3.5 flex-col justify-between bg-white text-[12px]">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 px-2 py-1 font-bold text-neutral-900 tracking-tight text-[14px]">
-                    <span className="w-4 h-4 rounded bg-black flex items-center justify-center text-white text-[9px]">M</span>
-                    <span>midspring</span>
+            <div className="flex min-h-[420px] sm:min-h-[580px] bg-white text-left text-neutral-700 overflow-hidden">
+              {/* Column 1: Left Navigation Sidebar (Icon rail on mobile, full width on tablet/desktop) */}
+              <div className="w-11 sm:w-48 lg:w-56 shrink-0 border-r border-neutral-100 p-2 sm:p-3.5 flex flex-col justify-between bg-white text-[12px]">
+                <div className="space-y-3 sm:space-y-4">
+                  {/* Midspring Brand Mark */}
+                  <div className="flex items-center gap-2 px-1 sm:px-2 py-1 font-bold text-neutral-900 tracking-tight text-[14px]">
+                    <span className="w-5 h-5 sm:w-4 sm:h-4 rounded bg-black flex items-center justify-center text-white text-[10px] sm:text-[9px] shrink-0 font-bold">
+                      M
+                    </span>
+                    <span className="hidden sm:inline">midspring</span>
                   </div>
 
-                  <div className="space-y-0.5">
+                  {/* Navigation Items (Icons only on mobile, Icon+Label on tablet/desktop) */}
+                  <div className="space-y-1 sm:space-y-0.5">
                     {[
-                      { name: 'Get Started', icon: Sparkles },
+                      { name: 'Get Started', icon: Sparkles, hideOnMobile: true },
                       { name: 'Dashboard', icon: LayoutGrid },
-                      { name: 'Content Library', icon: Library },
+                      { name: 'Content Library', icon: Library, hideOnMobile: true },
                       { name: 'Campaigns', icon: Layers },
-                      { name: 'My Creators', icon: Users },
+                      { name: 'My Creators', icon: Users, hideOnMobile: true },
                       { name: 'AI Video Studio', icon: Video, active: true },
                       { name: 'Product Center', icon: ShoppingBag },
-                      { name: 'Website Widget', icon: Globe },
-                      { name: 'Creator Recruitment', icon: UserPlus },
+                      { name: 'Website Widget', icon: Globe, hideOnMobile: true },
+                      { name: 'Creator Recruitment', icon: UserPlus, hideOnMobile: true },
                     ].map((item) => (
                       <button
                         key={item.name}
                         onClick={() => setActiveNav(item.name)}
-                        className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-medium transition-colors ${
+                        title={item.name}
+                        className={`w-full flex items-center justify-center sm:justify-start gap-2 p-2 sm:px-2.5 sm:py-1.5 rounded-lg text-[12px] font-medium transition-colors cursor-pointer ${
+                          item.hideOnMobile ? 'hidden sm:flex' : 'flex'
+                        } ${
                           activeNav === item.name
                             ? 'bg-neutral-100 text-neutral-900 font-semibold'
                             : 'text-neutral-500 hover:text-neutral-900 hover:bg-neutral-50'
                         }`}
                       >
-                        <item.icon className="w-3.5 h-3.5" />
-                        <span className="truncate">{item.name}</span>
+                        <item.icon className="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" />
+                        <span className="hidden sm:inline truncate">{item.name}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-neutral-100 space-y-1">
-                  <div className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider px-2 mb-1">
+                {/* Settings / Billing */}
+                <div className="pt-2 sm:pt-3 border-t border-neutral-100 space-y-1">
+                  <div className="hidden sm:block text-[10px] font-semibold text-neutral-400 uppercase tracking-wider px-2 mb-1">
                     Settings
                   </div>
-                  <div className="flex items-center gap-2 px-2.5 py-1 text-neutral-500 hover:text-neutral-900 cursor-pointer">
-                    <CreditCard className="w-3.5 h-3.5" />
-                    <span>Billing</span>
+                  <div
+                    title="Billing"
+                    className="flex items-center justify-center sm:justify-start gap-2 p-2 sm:px-2.5 sm:py-1 text-neutral-500 hover:text-neutral-900 cursor-pointer rounded-lg hover:bg-neutral-50"
+                  >
+                    <CreditCard className="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" />
+                    <span className="hidden sm:inline">Billing</span>
                   </div>
                 </div>
               </div>
 
               {/* Column 2: Middle Sub-list (Desktop only) */}
-              <div className="hidden lg:flex lg:col-span-2 border-r border-neutral-100 p-3 flex-col bg-[#fdfdfd] text-[11.5px]">
+              <div className="hidden lg:flex lg:w-44 shrink-0 border-r border-neutral-100 p-3 flex-col bg-[#fdfdfd] text-[11.5px]">
                 <div className="flex items-center justify-between pb-2 mb-2 border-b border-neutral-100">
                   <span className="font-semibold text-neutral-500 text-[10.5px] uppercase tracking-wider">
                     Order
@@ -184,26 +195,26 @@ export const Hero: React.FC<HeroProps> = ({
 
                 <div className="space-y-1.5">
                   <div className="p-2 rounded-lg bg-neutral-100 text-neutral-900 font-medium flex items-center gap-2">
-                    <CheckSquare className="w-3.5 h-3.5 text-neutral-700" />
+                    <CheckSquare className="w-3.5 h-3.5 text-neutral-700 shrink-0" />
                     <span className="truncate">Top maturity curri...</span>
                   </div>
                   <div className="p-2 rounded-lg text-neutral-600 hover:bg-neutral-50 flex items-center gap-2 cursor-pointer">
-                    <CheckSquare className="w-3.5 h-3.5 text-neutral-400" />
+                    <CheckSquare className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
                     <span className="truncate">Winning UGC scri...</span>
                   </div>
                   <div className="p-2 rounded-lg text-neutral-600 hover:bg-neutral-50 flex items-center gap-2 cursor-pointer">
-                    <CheckSquare className="w-3.5 h-3.5 text-neutral-400" />
+                    <CheckSquare className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
                     <span className="truncate">Top performing ad...</span>
                   </div>
                 </div>
               </div>
 
               {/* Column 3: Main Studio Chat & Generation Canvas (Fully Adaptive) */}
-              <div className="md:col-span-9 lg:col-span-8 p-3.5 sm:p-6 flex flex-col justify-between bg-white">
-                <div className="space-y-4 sm:space-y-6">
+              <div className="flex-1 min-w-0 p-3 sm:p-6 flex flex-col justify-between bg-white">
+                <div className="space-y-3 sm:space-y-6">
                   {/* User Prompt Message Bubble (Right Aligned) */}
-                  <div className="flex items-start justify-end gap-2">
-                    <div className="bg-[#f4f4f5] text-neutral-800 text-[11.5px] sm:text-[12.5px] px-3.5 py-2.5 rounded-2xl rounded-tr-xs max-w-[90%] sm:max-w-md leading-relaxed">
+                  <div className="flex items-start justify-end gap-1.5 sm:gap-2">
+                    <div className="bg-[#f4f4f5] text-neutral-800 text-[11px] sm:text-[12.5px] px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-2xl rounded-tr-xs max-w-[88%] sm:max-w-md leading-relaxed">
                       Generate 3 premium sunglasses ad concepts using product shots and brand inputs.
                     </div>
                     <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-neutral-200 border border-neutral-300 flex items-center justify-center text-[10px] font-semibold text-neutral-700 shrink-0">
@@ -212,21 +223,21 @@ export const Hero: React.FC<HeroProps> = ({
                   </div>
 
                   {/* AI Generating Response Header */}
-                  <div className="space-y-2.5 sm:space-y-3">
-                    <div className="flex items-center gap-2 text-neutral-800 text-[11.5px] sm:text-[12px]">
-                      <span className="w-5 h-5 rounded-md bg-neutral-900 text-white flex items-center justify-center text-[10px]">
+                  <div className="space-y-2 sm:space-y-3">
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-neutral-800 text-[11px] sm:text-[12px]">
+                      <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-neutral-900 text-white flex items-center justify-center text-[9px] sm:text-[10px]">
                         ✦
                       </span>
                       <span className="font-semibold text-neutral-900">Generating...</span>
                     </div>
-                    <p className="text-[11.5px] sm:text-[12px] text-neutral-500 pl-0 sm:pl-7">
+                    <p className="text-[10.5px] sm:text-[12px] text-neutral-500 pl-0 sm:pl-7 truncate sm:whitespace-normal">
                       Here are your first AI-generated sunglasses ad concepts:
                     </p>
 
-                    {/* 3 Generated Media Cards (1-col on mobile, 3-col on tablet/desktop) */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pl-0 sm:pl-7 pt-1">
+                    {/* 3 Generated Media Cards (Always 3-col side-by-side as on web, NOT stacked) */}
+                    <div className="grid grid-cols-3 gap-1.5 sm:gap-3 pl-0 sm:pl-7 pt-1">
                       {/* Card 1: Woman holding sunglasses */}
-                      <div className="relative aspect-[4/5] sm:aspect-[3/4] rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/80 group shadow-xs">
+                      <div className="relative aspect-[3/4] sm:aspect-[3/4] rounded-lg sm:rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/80 group shadow-2xs">
                         <img
                           src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=600&q=80"
                           alt="AI generated sunglasses ad concept 1"
@@ -234,13 +245,13 @@ export const Hero: React.FC<HeroProps> = ({
                           loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
-                        <div className="absolute bottom-2 left-2 text-[10px] text-white font-mono bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded">
-                          Concept 01 • 9:16
+                        <div className="absolute bottom-1.5 sm:bottom-2 left-1.5 sm:left-2 text-[8px] sm:text-[10px] text-white font-mono bg-black/50 backdrop-blur-xs px-1.5 py-0.5 rounded">
+                          Concept 01
                         </div>
                       </div>
 
                       {/* Card 2: Close up face portrait wearing sunglasses */}
-                      <div className="relative aspect-[4/5] sm:aspect-[3/4] rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/80 group shadow-xs">
+                      <div className="relative aspect-[3/4] sm:aspect-[3/4] rounded-lg sm:rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/80 group shadow-2xs">
                         <img
                           src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80"
                           alt="AI generated sunglasses ad concept 2"
@@ -248,63 +259,60 @@ export const Hero: React.FC<HeroProps> = ({
                           loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
-                        <div className="absolute bottom-2 left-2 text-[10px] text-white font-mono bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded">
-                          Concept 02 • 9:16
+                        <div className="absolute bottom-1.5 sm:bottom-2 left-1.5 sm:left-2 text-[8px] sm:text-[10px] text-white font-mono bg-black/50 backdrop-blur-xs px-1.5 py-0.5 rounded">
+                          Concept 02
                         </div>
                       </div>
 
                       {/* Card 3: Creating... Placeholder Card */}
-                      <div className="relative aspect-[4/5] sm:aspect-[3/4] rounded-xl overflow-hidden bg-[#fafafa] border border-dashed border-neutral-300 flex flex-col items-center justify-center text-center p-3">
-                        <Loader2 className="w-5 h-5 text-neutral-400 animate-spin mb-2" />
-                        <span className="text-[12px] font-medium text-neutral-500">Creating...</span>
-                        <span className="text-[10px] text-neutral-400 mt-1">Rendering shaders</span>
+                      <div className="relative aspect-[3/4] sm:aspect-[3/4] rounded-lg sm:rounded-xl overflow-hidden bg-[#fafafa] border border-dashed border-neutral-300 flex flex-col items-center justify-center text-center p-1.5 sm:p-3">
+                        <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 animate-spin mb-1 sm:mb-2" />
+                        <span className="text-[10px] sm:text-[12px] font-medium text-neutral-500">Creating...</span>
+                        <span className="text-[8px] sm:text-[10px] text-neutral-400 mt-0.5 hidden xs:inline">Rendering shaders</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Interactive Prompt Box (Responsive Flexwrap) */}
-                <div className="mt-6 sm:mt-8 pt-3 sm:pt-4 border-t border-neutral-100">
-                  <div className="bg-[#fafafa] rounded-2xl p-2.5 sm:p-3 border border-neutral-200/90 shadow-2xs focus-within:border-neutral-400 transition-colors">
+                {/* Bottom Interactive Prompt Box (Responsive) */}
+                <div className="mt-4 sm:mt-8 pt-2.5 sm:pt-4 border-t border-neutral-100">
+                  <div className="bg-[#fafafa] rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-neutral-200/90 shadow-2xs focus-within:border-neutral-400 transition-colors">
                     <input
                       type="text"
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
                       placeholder="Generate premium eyewear ad concept..."
-                      className="w-full bg-transparent text-[12px] sm:text-[13px] text-neutral-800 placeholder-neutral-400 focus:outline-none px-1"
+                      className="w-full bg-transparent text-[11px] sm:text-[13px] text-neutral-800 placeholder-neutral-400 focus:outline-none px-1"
                     />
 
-                    <div className="mt-2.5 pt-2 border-t border-neutral-200/60 flex flex-wrap items-center justify-between gap-2 text-[10.5px] sm:text-[11px] text-neutral-500">
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        <button className="p-1 hover:text-black">
-                          <Paperclip className="w-3.5 h-3.5" />
+                    <div className="mt-2 pt-1.5 sm:pt-2 border-t border-neutral-200/60 flex items-center justify-between gap-1 text-[10px] sm:text-[11px] text-neutral-500">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
+                        <button className="p-0.5 sm:p-1 hover:text-black">
+                          <Paperclip className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         </button>
-                        <span className="px-2 py-0.5 rounded bg-white border border-neutral-200 font-mono text-[10px]">
+                        <span className="px-1.5 sm:px-2 py-0.5 rounded bg-white border border-neutral-200 font-mono text-[9px] sm:text-[10px]">
                           9:16
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-white border border-neutral-200 font-mono text-[10px]">
+                        <span className="hidden xs:inline-block px-1.5 sm:px-2 py-0.5 rounded bg-white border border-neutral-200 font-mono text-[9px] sm:text-[10px]">
                           720p
-                        </span>
-                        <span className="hidden xs:inline-block px-2 py-0.5 rounded bg-white border border-neutral-200 font-mono text-[10px]">
-                          4K Ready
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 ml-auto">
-                        <div className="flex items-center gap-1 text-[10.5px] sm:text-[11px] font-medium text-neutral-700 bg-white border border-neutral-200 px-2 py-1 rounded-md cursor-pointer hover:border-neutral-300">
+                      <div className="flex items-center gap-1 sm:gap-1.5 ml-auto">
+                        <div className="flex items-center gap-0.5 sm:gap-1 text-[9.5px] sm:text-[11px] font-medium text-neutral-700 bg-white border border-neutral-200 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md cursor-pointer hover:border-neutral-300">
                           <span>Seedance 2.0</span>
-                          <ChevronDown className="w-3 h-3 text-neutral-400" />
+                          <ChevronDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-neutral-400" />
                         </div>
                         <button
                           onClick={handleGenerate}
                           disabled={isGenerating}
-                          className="w-7 h-7 rounded-full bg-black hover:bg-neutral-800 text-white flex items-center justify-center transition-all active:scale-95 shadow-xs"
+                          className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black hover:bg-neutral-800 text-white flex items-center justify-center transition-all active:scale-95 shadow-xs shrink-0 cursor-pointer"
                           aria-label="Send prompt"
                         >
                           {isGenerating ? (
-                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <Loader2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 animate-spin" />
                           ) : (
-                            <ArrowRight className="w-3.5 h-3.5" />
+                            <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                           )}
                         </button>
                       </div>
